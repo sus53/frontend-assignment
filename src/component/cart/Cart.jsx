@@ -85,10 +85,10 @@ function Cart() {
                     Items Total : <span>{itemTotal}</span>
                 </div>
                 <div>
-                    Delivery Charge : <span>200</span>
+                    Delivery Charge : <span>{itemTotal ? 200 : 0}</span>
                 </div>
                 <div>
-                    Total Charge : <span>{total}</span>
+                    Total Charge : <span>{itemTotal ? total : 0}</span>
                 </div>
                 <div>
                     <button>
