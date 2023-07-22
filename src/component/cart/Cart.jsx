@@ -47,7 +47,8 @@ function Cart() {
     useEffect(() => {
         const FetchCart = () => {
             let cart = JSON.parse(window.localStorage.getItem("cart"));
-            setCart(cart);
+            if (cart)
+                setCart(cart);
         }
         FetchCart();
     }, [])
