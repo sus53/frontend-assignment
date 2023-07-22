@@ -1,0 +1,89 @@
+.cart {
+    >.table {
+        width: 100vw;
+
+        >.head {
+            font-size: larger;
+            font-weight: 600;
+        }
+
+        >.row {
+            display: flex;
+            width: calc(100vw - 2rem);
+            padding: 1rem;
+            text-align: center;
+            border-bottom: 1px solid lightgray;
+
+            :nth-child(1) {
+                width: 5%;
+                border-right: 1px solid lightgray;
+            }
+
+            :nth-child(2) {
+                width: 60%;
+            }
+
+            :nth-child(3) {
+                width: 15%;
+                display: flex;
+                justify-content: space-evenly;
+
+                >button {
+                    width: 20%;
+                    height: 2rem;
+                    outline: none;
+                    border: none;
+                    background-color: lightgray;
+
+                    &:hover {
+                        background-color: rgb(68, 68, 68);
+                        transform: scale(1.1);
+                        transition: all 0.3s ease-out;
+                        color: white;
+                    }
+
+                    >* {
+                        width: 100%;
+                        border: none;
+                    }
+                }
+            }
+
+            :nth-child(4) {
+                width: 10%;
+
+            }
+
+            :nth-child(5) {
+                width: 10%;
+
+                >button {
+                    width: 30%;
+                    height: 2rem;
+                    outline: none;
+                    border: none;
+                    background-color: lightgray;
+
+                    &:hover {
+                        background-color: rgb(68, 68, 68);
+                        transform: scale(1.1);
+                        transition: all 0.3s ease-out;
+                        color: white;
+                    }
+
+                    >* {
+                        width: 100%;
+                        border: none;
+                    }
+                }
+
+            }
+        }
+
+        >.not {
+            margin-top: 15rem;
+            font-size: 40px;
+            text-align: center;
+        }
+    }
+}
