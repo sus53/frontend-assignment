@@ -9,7 +9,7 @@ const cartSlice = createSlice({
     reducers: {
         addCart: (state, action) => {
             state.list = action.payload.list;
-            window.sessionStorage.setItem("cart", JSON.stringify(action.payload.list));
+            window.localStorage.setItem("cart", JSON.stringify(action.payload.list));
         }
     }
 

@@ -11,20 +11,21 @@ function Cart() {
     const dispatch = useDispatch();
 
     const [cart, setCart] = useState(Cart);
-    const [currentID, setCurrentID] = useState('');
-    const [quantity, setQuantity] = useState(1)
-    const [price, setPrice] = useState(500);
+    const [itemTotal, setItemTotal] = useState();
+    const [total, setTotal] = useState(0);
 
     const QuantityHandler = (operation, id) => {
-        setCurrentID(id);
-        if (operation == "s") {
-            if (quantity == 0) return;
-            setQuantity(quantity - 1);
-            setPrice(price - cart.price)
-        }
-        else {
-            setQuantity(quantity + 1);
-        }
+        setCart(prevCart => {
+            return prevCart.map(item => {
+                if (item.id === id) {
+                    const newQuantity = operation === 's' ? item.quantity - 1 : item.quantity + 1;
+                    if (newQuantity < 1) return { ...item, quantity: 0 };;
+                    return { ...item, quantity: newQuantity };
+                }
+                return item;
+            });
+        });
+        dispatch(addCart({ list: cart }));
     }
 
     const DeleteHandler = (id) => {
@@ -34,21 +35,21 @@ function Cart() {
     }
 
     useEffect(() => {
+        const AddTotal = () => {
+            let tot = cart.reduce((acc, item) => acc + (item.price * item.quantity), 0)
+            setItemTotal(tot.toFixed(2));
+            setTotal((tot + 200).toFixed(2));
+        }
+        AddTotal();
+    }, [cart])
 
-        const ModifyArray = () => {
-            const updatedArr = cart.map(item => {
-                return { ...item, quantity: 1 };
-            });
-            setCart(updatedArr);
-        };
 
+    useEffect(() => {
         const FetchCart = () => {
-            let cart = JSON.parse(window.sessionStorage.getItem("cart"));
+            let cart = JSON.parse(window.localStorage.getItem("cart"));
             setCart(cart);
         }
         FetchCart();
-        ModifyArray();
-
     }, [])
 
 
@@ -59,17 +60,38 @@ function Cart() {
                     <div>S.N.</div>
                     <div>Product</div>
                     <div>Quantity</div>
-                    <div>Price</div>
+                    <div>Unit Price</div>
+                    <div>Total Price</div>
                     <div>Option</div>
                 </div>
                 {cart.length > 0 ? cart.map((item, i) =>
                     <div className='row' key={item.id}>
                         <div>{i + 1}</div>
                         <div>{item.title}</div>
-                        <div><button onClick={() => QuantityHandler("s", item.id)} ><RemoveOutlined></RemoveOutlined></button> {cart.quantity} <button onClick={() => QuantityHandler("a", item.id)}><AddOutlined></AddOutlined></button></div>
-                        <div>{item.price * quantity}</div>
+                        <div><button onClick={() => QuantityHandler("s", item.id)} ><RemoveOutlined></RemoveOutlined></button> {item.quantity} <button onClick={() => QuantityHandler("a", item.id)}><AddOutlined></AddOutlined></button></div>
+                        <div>{item.price}</div>
+                        <div>{item.price * item.quantity}</div>
                         <div><button onClick={() => DeleteHandler(item.id)} ><DeleteOutlined></DeleteOutlined></button></div>
                     </div>) : <div className='not'>"Nothing Added to Cart"</div>}
+            </div>
+            <div className='final-cart'>
+                <div className='heading'>
+                    Summary
+                </div>
+                <div>
+                    Items Total : <span>{itemTotal}</span>
+                </div>
+                <div>
+                    Delivery Charge : <span>200</span>
+                </div>
+                <div>
+                    Total Charge : <span>{total}</span>
+                </div>
+                <div>
+                    <button>
+                        Place Order
+                    </button>
+                </div>
             </div>
         </div>
     )

@@ -19,7 +19,7 @@ function ProductDetail() {
 
     useEffect(() => {
         const FetchProduct = async () => {
-            let product = JSON.parse(window.sessionStorage.getItem("product"));
+            let product = JSON.parse(window.localStorage.getItem("product"));
             if (!product) {
                 navigate('/');
             }

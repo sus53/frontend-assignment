@@ -20,7 +20,7 @@
             }
 
             :nth-child(2) {
-                width: 60%;
+                width: 50%;
             }
 
             :nth-child(3) {
@@ -57,6 +57,11 @@
             :nth-child(5) {
                 width: 10%;
 
+            }
+
+            :nth-child(6) {
+                width: 10%;
+
                 >button {
                     width: 30%;
                     height: 2rem;
@@ -84,6 +89,56 @@
             margin-top: 15rem;
             font-size: 40px;
             text-align: center;
+        }
+    }
+
+    >.final-cart {
+        display: flex;
+        justify-content: space-between;
+        padding: 2rem 1rem;
+        position: fixed;
+        bottom: 0;
+        height: 2rem;
+        width: calc(100% - 2rem);
+        border: 1px solid black;
+        text-align: left;
+
+        >div {
+            width: 20%;
+
+            >span {
+                font-size: 20px;
+                font-weight: 700;
+            }
+
+            >button {
+                width: 50%;
+                height: 2rem;
+                margin-left: 20%;
+                outline: none;
+                border: none;
+                background-color: lightgray;
+                transition: all 0.3s ease-out;
+
+                &:hover {
+                    background-color: rgb(68, 68, 68);
+                    transform: scale(1.1);
+                    color: white;
+                }
+
+                >* {
+                    width: 100%;
+                    border: none;
+                }
+            }
+        }
+
+        >.heading {
+            width: max-content;
+            position: absolute;
+            top: -0.7rem;
+            background-color: white;
+            padding: 0 1rem;
         }
     }
 }

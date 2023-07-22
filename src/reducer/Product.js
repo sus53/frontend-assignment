@@ -13,7 +13,7 @@ const productSlice = createSlice({
         },
         addCurrentProduct: (state, action) => {
             state.currentProduct = action.payload.currentProduct;
-            window.sessionStorage.setItem("product", JSON.stringify(action.payload.currentProduct));
+            window.localStorage.setItem("product", JSON.stringify(action.payload.currentProduct));
         }
     }
 
