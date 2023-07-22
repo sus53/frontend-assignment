@@ -36,9 +36,11 @@ function Cart() {
 
     useEffect(() => {
         const AddTotal = () => {
-            let tot = cart.reduce((acc, item) => acc + (item.price * item.quantity), 0)
-            setItemTotal(tot.toFixed(2));
-            setTotal((tot + 200).toFixed(2));
+            if (cart) {
+                let tot = cart.reduce((acc, item) => acc + (item.price * item.quantity), 0)
+                setItemTotal(tot.toFixed(2));
+                setTotal((tot + 200).toFixed(2));
+            }
         }
         AddTotal();
     }, [cart])
